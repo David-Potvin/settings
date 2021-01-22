@@ -25,3 +25,7 @@ if has("autocmd")
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
+" avoid mistyping commands
+command! W w
+command! Wq wq
+command! Bd bd
