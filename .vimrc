@@ -1,3 +1,4 @@
+" Colemak remapping for the movement keys
 :nnoremap n j
 :nnoremap e k
 :nnoremap i l
@@ -5,8 +6,22 @@
 :nnoremap k n
 :nnoremap l i
 
+" Remap for the <Esc> key
+imap jj <Esc>
+
+
+" Add an underline on the current line 
+:autocmd InsertEnter,InsertLeave * set cul!
+
+" Change cursor when entering insert mode
 if has("autocmd")
-  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' | 
+    \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
+
