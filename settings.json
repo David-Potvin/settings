@@ -4,4 +4,6 @@
     "workbench.colorCustomizations": {
     "editorRuler.foreground": "#ff4081"
     }
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "vim.vimrc.enable": true,
 }
